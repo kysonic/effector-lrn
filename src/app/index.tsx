@@ -1,9 +1,16 @@
-import React from 'react';
-import { useStore } from 'effector-react';
+import React, { useEffect } from 'react';
+import { useUnit } from 'effector-react';
 import { $counter, increment } from './model';
 
 export function App() {
-    const counter = useStore($counter);
+    const counter = useUnit($counter);
+
+    useEffect(() => {
+        fetch('https://example.com/user')
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error('Error!:', error));
+    }, []);
 
     return (
         <div>
